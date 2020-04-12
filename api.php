@@ -11,7 +11,7 @@ $username = $_GET["un"];
 $ln = $_GET["ln"];
 */
 
-$un = '6IQsGIRtnukRc73bKDoZ2NCaLjc-2Am92HJd9PB0';
+$un = '6IQsGIRtnukRc73bKDoZ2NCaLjc-2Am92HJd9PB0';//hueのユーザーネームを書き換える
 
 if ($com == "22") {
 $on = (bool)false ;
@@ -19,12 +19,6 @@ $arr = array('on' => $on);
 $url = 'http://192.168.0.4/api/' . $un . '/lights/3/state';//hueブリッジのIPアドレスを指定
 $data_json = json_encode($arr);
 $method = 'PUT';
-}
-
-elseif ($com == "99") {
-$pram = rand (1 , 100000);
-$url = 'http://192.168.0.5:8888/api/blackbean/tv/power?p=' . $pram ;
-$method = 'GET';
 }
 
 elseif ($com == "33") {
