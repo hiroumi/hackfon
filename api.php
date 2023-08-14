@@ -1,3 +1,5 @@
+<?php
+
 $com = $_GET["command"];
 
 /*
@@ -11,38 +13,45 @@ $username = $_GET["un"];
 $ln = $_GET["ln"];
 */
 
-$un = '6IQsGIRtnukRc73bKDoZ2NCaLjc-2Am92HJd9PB0';//hueのユーザーネームを書き換える
+$un = 'Qh4lRFiVe6uJGsR8eD1ZE-nSNB9mI3BmCTNewP1m';
+$url = 'http://192.168.0.4/api/';
 
 if ($com == "22") {
-$on = (bool)false ;
+$on = (bool)false ;	
 $arr = array('on' => $on);
-$url = 'http://192.168.0.4/api/' . $un . '/lights/3/state';//hueブリッジのIPアドレスを指定
+
+$url . $un . '/lights/4/state'; 
 $data_json = json_encode($arr);
-$method = 'PUT';
+$method = 'PUT';	
 }
 
-elseif ($com == "33") {
+elseif ($com == "9") {
+$pram = rand (1 , 100000);
+$url = 'http://192.168.0.5:8888/api/blackbean/tv/power?p=' . $pram ; 
+$method = 'GET';
+}
+
+elseif ($com == "3") {
 $on = (bool)true ;
 $sat = (int)254 ;
 $bri = (int)200 ;
+
 $method = 'PUT';
 $hue = (int)60000;
 $arr = array('on' => $on, 'sat' => $sat, 'bri' => $bri, 'hue' => $hue);
-$url = 'http://192.168.0.4/api/' . $un . '/lights/3/state';　//hueブリッジのIPアドレス
+$url = 'http://192.168.0.4/api/' . $un . '/lights/4/state';
 $data_json = json_encode($arr);
 }
 
-elseif ($com == "77") {
+elseif ($com == "7") {
 $on = (bool)true ;
 $sat = (int)254 ;
 $bri = (int)200 ;
+
 $method = 'PUT';
 $hue = (int)10000;
 $arr = array('on' => $on, 'sat' => $sat, 'bri' => $bri, 'hue' => $hue);
-$url = 'http://192.168.0.4/api/' . $un . '/lights/3/state';　//hueブリッジのIPアドレス
-$data_json = json_encode($arr);
-$arr = array('on' => $on, 'sat' => $sat, 'bri' => $bri, 'hue' => $hue);
-$url = 'http://192.168.0.4/api/' . $un . '/lights/3/state';
+$url = 'http://192.168.0.4/api/' . $un . '/lights/4/state';
 $data_json = json_encode($arr);
 }
 
@@ -55,14 +64,14 @@ $min = 1;
 $max = 65000;
 $hue = rand ( $min , $max );
 $arr = array('on' => $on, 'sat' => $sat, 'bri' => $bri, 'hue' => $hue);
-$url = 'http://192.168.0.4/api/' . $un . '/lights/3/state';　//hueブリッジのIPアドレス
+$url = 'http://192.168.0.4/api/' . $un . '/lights/4/state';
 $data_json = json_encode($arr);
 }
 
 $curl = curl_init($url);
-curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method); // ￠¨
+curl_setopt($curl, CURLOPT_CUSTOMREQUEST, $method); // ¢¨
 curl_setopt($curl, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-curl_setopt($curl, CURLOPT_POSTFIELDS, $data_json); // ￠¨
+curl_setopt($curl, CURLOPT_POSTFIELDS, $data_json); // ¢¨
 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 $response = curl_exec($curl);
@@ -71,3 +80,5 @@ curl_close($curl);
 echo $url . '<br>' ;
 echo $data_json . '<br>' ;
 echo $response . '<br>' ;
+
+?>
